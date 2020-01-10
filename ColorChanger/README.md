@@ -66,3 +66,5 @@ In this example I tried using the shader on the materials attached to Unity-chan
 ![Example3_2](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic3_2.png)
 ![Example3_1](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic3_1.png)
 
+You really don't have to see the colors as numbers, and in most cases you won't have to. Just experiment with different values and see what results you get. Examples 1 and 2 visualize the colors as numbers just to help you understand how the operations affect the colors.
+
