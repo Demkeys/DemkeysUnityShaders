@@ -22,7 +22,7 @@ Hopefully some examples will help you better understand how to use the propertie
 
 __Example 1__: 
 ![Example1](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic1.png)
-A simpler example to help you understand the operations. In this example the texture has only one color, Red, which in RGB would be (1,0,0). On the left you see the original texture color (red). On the right you see the resulting color after color changing operations (green). Let's take a look at the properties:
+A simpler example to help you understand the operations and how the values change. In this example the texture has only one color, Red, which in RGB would be (1,0,0). On the left you see the original texture color (red). On the right you see the resulting color after color changing operations (green). Let's take a look at the properties:
 Red Channel Operator: Subtract
 Red Channel Operand: R
 This means the value of R will be subtracted by itself.
@@ -38,12 +38,27 @@ This leaves the color unaffected because is basically multiplying the values by 
 
 The calculation would then go like so...
 Initial color RGB value is (1,0,0), which is Red.
-`R = R-R = 1-1 = 0
-G = G+R = 0+1 = 1
-B = 0`
+
+`R = R-R = 1-1 = 0`
+
+`G = G+R = 0+1 = 1`
+
+`B = 0`
+
 Thus, the resulting color is Green (0,1,0).
 
+Now, notice that Calculate Channels Independently is set to True. Let's set it to false. This is the result.
+![Example2](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic2.png)
 
+Here's a breakdown of the calculation:
+
+`R = R-R = 1-1 = 0`
+
+`G = G+R = 0+0 = 0`
+
+`B = 0`
+
+The resulting color is Black (0,0,0). Notice how the calculation done on the R channel affected the later calculation done on the G channel? That's what Calculate Channels Independently does. The channels are calculated in the order R-G-B-A, so if Calculate Channels Independently is set to False, calculations done on R, will affect later calculations, if the value of R is being used in them.
 
 
 
