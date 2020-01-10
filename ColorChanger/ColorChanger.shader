@@ -1,29 +1,26 @@
-/////////////////////////////////////////////////////////////////////////////////////////////
-// Color Changer shader: This is shader changes the colors of the texture in fragment shader.
-// For each color channel, you can choose to Switch, Add, Subtract, Multiply or Divide it's
-// value with the R, G, B or A channel's value. After these calculations are done, you can
-// additionally choose to Add, Subtract, Multiply or Divide the result with another color.
-// This shader is meant to be used as a debugging shader, so for example, if you wanna see
-// what a certain model would look like with different colored textures, you can use this 
-// shader to test out different color schemes, rather than repainting and attaching a new 
-// texture for a different color scheme. That being said, the shader can be used as is, to 
-// change the color of your textures, if you wish to do so.
-/////////////////////////////////////////////////////////////////////////////////////////////
 Shader "Custom/ColorChanger"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTex ("Texture", 2D) = "red" {}
 
-        [Header(Color Channel Operations)]
-        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _R_Op ("Red Operator", Float) = 0
-        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _G_Op ("Green Operator", Float) = 0
-        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _B_Op ("Blue Operator", Float) = 0
-        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _A_Op ("Alpha Operator", Float) = 0
+        [Toggle] _UseColorChange ("Use Color Change?", Float) = 1
+        [Toggle] _UseTempBuffer ("Calculate Channels Independently", Float) = 1
 
+        [Header(Red Channel Operations)]
+        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _R_Op ("Red Channel Operator", Float) = 0
         [KeywordEnum(R,G,B,A)] _R ("Red Channel Operand", Float) = 0
+        
+        [Header(Green Channel Operations)]
+        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _G_Op ("Green Channel Operator", Float) = 0
         [KeywordEnum(R,G,B,A)] _G ("Green Channel Operand", Float) = 1
+        
+        [Header(Blue Channel Operations)]
+        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _B_Op ("Blue Channel Operator", Float) = 0
         [KeywordEnum(R,G,B,A)] _B ("Blue Channel Operand", Float) = 2
+        
+        [Header(Alpha Channel Operations)]
+        [KeywordEnum(Keep,Switch,Add,Subtract,Multiply,Divide)] _A_Op ("Alpha Channel Operator", Float) = 0
         [KeywordEnum(R,G,B,A)] _A ("Alpha Channel Operand", Float) = 3
 
         [Header(Final Color Operation)]
@@ -60,6 +57,7 @@ Shader "Custom/ColorChanger"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _UseColorChange; float _UseTempBuffer;
             float _R_Op; float _G_Op; float _B_Op; float _A_Op; 
             float _R; float _G; float _B; float _A; 
             float _FinalColOp; float4 _FinalColOperand;
@@ -103,12 +101,29 @@ Shader "Custom/ColorChanger"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
+                
+                if(_UseColorChange)
+                {
+                    if(_UseTempBuffer==1)
+                    {
+                        // Temp buffer to store initial color value, since col will be affected
+                        // during calculations.
+                        float4 tempBuffer = col;
 
-                ChooseColorChannel(_R_Op, _R, col.r, col);
-                ChooseColorChannel(_G_Op, _G, col.g, col);
-                ChooseColorChannel(_B_Op, _B, col.b, col);
-                ChooseColorChannel(_A_Op, _A, col.a, col);
-                FinalColorOp(_FinalColOp, col, _FinalColOperand);
+                        ChooseColorChannel(_R_Op, _R, col.r, tempBuffer);
+                        ChooseColorChannel(_G_Op, _G, col.g, tempBuffer);
+                        ChooseColorChannel(_B_Op, _B, col.b, tempBuffer);
+                        ChooseColorChannel(_A_Op, _A, col.a, tempBuffer);
+                    }
+                    else
+                    {
+                        ChooseColorChannel(_R_Op, _R, col.r, col);
+                        ChooseColorChannel(_G_Op, _G, col.g, col);
+                        ChooseColorChannel(_B_Op, _B, col.b, col);
+                        ChooseColorChannel(_A_Op, _A, col.a, col);
+                    }
+                    FinalColorOp(_FinalColOp, col, _FinalColOperand);
+                }
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
