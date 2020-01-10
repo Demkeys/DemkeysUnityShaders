@@ -47,6 +47,7 @@ Initial color RGB value is (1,0,0), which is Red.
 
 Thus, the resulting color is Green (0,1,0).
 
+__Example 2__:
 Now, notice that Calculate Channels Independently is set to True. Let's set it to false. This is the result.
 ![Example2](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic2.png)
 
@@ -60,7 +61,8 @@ Here's a breakdown of the calculation:
 
 The resulting color is Black (0,0,0). Notice how the calculation done on the R channel affected the later calculation done on the G channel? That's what Calculate Channels Independently does. The channels are calculated in the order R-G-B-A, so if Calculate Channels Independently is set to False, calculations done on R, will affect later calculations, if the value of R is being used in them.
 
+__Example 3__:
+In this example I tried using the shader on the materials attached to Unity-chan. I changed some of the values for the body and hair materials. Here are the values, along with the results:
+![Example3_2](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic3_2.png)
+![Example3_1](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic3_1.png)
 
-
-
-TODO: Examples to help you understand how to use the various options.
