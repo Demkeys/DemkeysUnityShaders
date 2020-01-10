@@ -18,5 +18,34 @@ This is shader changes the colors of the texture in fragment shader. For each co
 - __Final Color Opeator__: Operator to use when doing calculations on the color produced by previous calculations.
 - __Final Color Operand__: Operand to use when doing calculations on the color produced by previous calculations.
 
+Hopefully some examples will help you better understand how to use the properties in the shader. However, if you would rather just experiment by changing options randomly, that works perfectly fine too, because the whole point if this shader is to see what new color schemes you can come up with.
+
+__Example 1__: 
+![Example1](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorChanger/ExamplePic1.png)
+A simpler example to help you understand the operations. In this example the texture has only one color, Red, which in RGB would be (1,0,0). On the left you see the original texture color (red). On the right you see the resulting color after color changing operations (green). Let's take a look at the properties:
+Red Channel Operator: Subtract
+Red Channel Operand: R
+This means the value of R will be subtracted by itself.
+Green Channel Operator: Add
+Green Channel Operand: R
+This means the value of R will be added to the value of G.
+Blue Channel Operator: Keep
+Blue Channel Operand: B
+Since Blue Channel Operator is set to Keep, Blue channel keeps it's value, and no calculation is done. Same for Alpha channel.
+Final Color Operator: Multiply
+Final Color Operand: White (1,1,1,1)
+This leaves the color unaffected because is basically multiplying the values by 1.
+
+The calculation would then go like so...
+Initial color RGB value is (1,0,0), which is Red.
+`R = R-R = 1-1 = 0
+G = G+R = 0+1 = 1
+B = 0`
+Thus, the resulting color is Green (0,1,0).
+
+
+
+
+
 
 TODO: Examples to help you understand how to use the various options.
