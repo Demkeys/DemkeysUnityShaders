@@ -4,3 +4,4 @@ Unity shaders made for various purposes, written in Cg/HLSL. This is basically m
 * #### [UV Visualizer](https://github.com/Demkeys/DemkeysUnityShaders/tree/master/UVVisualizer) - Displays the UV mapping of a mesh as colors, allowing you to view the UV coordinates within the Unity Editor.
 * #### [Color Changer](https://github.com/Demkeys/DemkeysUnityShaders/tree/master/ColorChanger) - Debugging shader that can be used to change the color scheme of textures on your 3D models from within the Unity Editor.
 * #### [Unlit Ambient Occlusion](https://github.com/Demkeys/DemkeysUnityShaders/tree/master/UnlitAmbientOcclusion) - Simple unlit shader that supports Ambient Occlusions maps.
+* #### [DissolveNoClip](https://github.com/Demkeys/DemkeysUnityShaders/tree/master/DissolveNoClip) - Dissolve effect implemented using only transparency. No clip/discard.
