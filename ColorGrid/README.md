@@ -32,4 +32,4 @@ To use Color Grid:
 * Create a material and attach the shader to the material.
 * Create a Quad in the scene and attach the material to the quad.
 
-___NOTE: The Color Grid is implemented in the fragment shader, so the more pixels the rendered mesh is occupying on screen, the heavier the shader will become. This means that at bigger resolutions the shader can get heavier when the camera is close to the mesh. To get around this issue, use a camera to render the quad to a render texture, then use that render texture wherever. This way you can also have multiple copies of that Color Grid to display in multiple places.___
+___NOTE: The Color Grid is implemented in the fragment shader, so the more pixels the rendered mesh is occupying on screen, the heavier the shader will become. This means that at bigger resolutions the shader can get heavier when the camera is close to the mesh. To get around this issue, use another camera to render the quad to a render texture, then use that render texture wherever. This way you can also have multiple copies of that Color Grid to display in multiple places.___
