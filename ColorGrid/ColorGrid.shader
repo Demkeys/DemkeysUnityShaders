@@ -30,7 +30,7 @@ Shader "Unlit/ColorGridShader"
 
             #include "UnityCG.cginc"
 
-            #define GRID_DEBUG 1
+            #define GRID_DEBUG 0
 
             // Used to set ins_arr's size because the size isn't always known at runtime.
             // This is especially useful when setting ins_arr from script.
