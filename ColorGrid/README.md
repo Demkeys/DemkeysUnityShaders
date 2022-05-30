@@ -6,10 +6,10 @@ Instruction format - (OpCode, Operand1, Operand2 and Operand3).
 
 Currently supported OpCodes:
 * 0 = set_color_op - Set current color. This color will be used when coloring pixels on the grid.
-* 1 = draw_pixel_op - Color a cell at (x,y) position. x=opr1, y=opr2
-* 2 = draw_row_op - Fill row of cells at index. index=opr1
-* 3 = draw_column_op - Fill column of cells at index. index=opr1
-* 4 = randomize_grid - Fill each grid cell with a random color.
+* 1 = draw_pixel_op - Color a cell at (x,y) position. Params: x=opr1, y=opr2
+* 2 = draw_row_op - Fill row of cells at index. Params: index=opr1
+* 3 = draw_column_op - Fill column of cells at index. Params: index=opr1
+* 4 = randomize_grid - Fill each grid cell with a random color using seed for randomization. Params: seed=opr1
 * 5 = fill_grid_op - Fill all grid cells with current color.
 More operations might be added in the future.
 
@@ -26,6 +26,7 @@ Color Grid has two modes: Normal and Debug. To enable debug mode set GRID_DEBUG 
         * Call decode_op_data().
         * Repeat above two steps for every instruction.
     * Set grid size by setting _DbgGridSize x and y values in Inspector.
+    * If using randomize_grid op, set _DbgSeed value in Inspector.
     * Color Grid will call DebugIns() method to execute instructions.
 
 To use Color Grid:
