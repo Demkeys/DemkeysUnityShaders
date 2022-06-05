@@ -2,7 +2,7 @@
 
 ![](https://github.com/Demkeys/DemkeysUnityShaders/blob/master/ColorGrid/ColorGridScreenshot.png)
 
-A color grid implemented in a fragment shader. The color grid executes instructions to perform operations. 
+A programmable color grid implemented in a fragment shader. The color grid executes instructions to perform operations. 
 
 Instruction format - (OpCode, Operand1, Operand2 and Operand3).
 
